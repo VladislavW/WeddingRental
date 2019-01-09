@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\libs\Data\Data.csproj" />
     <ProjectReference Include="..\libs\Entities\Entities.csproj" />
+    <ProjectReference Include="..\libs\Services\Services.csproj" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
