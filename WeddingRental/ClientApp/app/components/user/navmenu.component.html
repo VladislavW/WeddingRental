@@ -12,29 +12,20 @@
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
-                <li *ngIf="!isAuthorized" [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/auth']">
-                        <span class='glyphicon glyphicon-home'></span> Authorization
-                    </a>
-                </li> 
-                <li *ngIf="isAuthorized" [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']">
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
                 </li>
-                <li  *ngIf="isAuthorized" [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/counter']">
                         <span class='glyphicon glyphicon-education'></span> Counter
                     </a>
                 </li>
-                <li  *ngIf="isAuthorized" [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/fetch-data']">
                         <span class='glyphicon glyphicon-th-list'></span> Fetch data
                     </a>
-                </li>
-
-                <li  *ngIf="isAuthorized" [routerLinkActive]="['link-active']">
-                   <button (click)="signOut()">Sign Out</button>
                 </li>
             </ul>
         </div>

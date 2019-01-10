@@ -236,8 +236,8 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-/WeddingRental
-/Data
-/Core
-/Entities
-/Services
+!/WeddingRental
+!/Data
+!/Core
+!/Entities
+!/Services
