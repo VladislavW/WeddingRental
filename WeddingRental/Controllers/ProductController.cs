@@ -1,0 +1,43 @@
+using System.Threading.Tasks;
+using AutoMapper;
+using Entities.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Services.Descriptors;
+using Services.Services;
+using WeddingRental.Models.Product.From;
+using WeddingRental.Models.Views.User;
+
+namespace WeddingRental.Controllers
+{
+    [Route("api/[controller]")]
+    public sealed class ProductController : Controller
+    {
+        private readonly IProductService _productService;
+        private readonly IMapper _mapper;
+        
+        public ProductController(IProductService productService, IMapper mapper)
+        {
+            _productService = productService;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("[action]")]
+        public async Task<JsonResult> Get()
+        {
+            var views = await _productService.GetProductCatalogViewsAsync();
+            return Json(views);
+        }
+        
+        [HttpPut]
+        [Route("[action]")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Put([FromBody] NewProductModel model)
+        {
+            await _productService.AddNewProductAsync(_mapper.Map<NewProductDescriptor>(model));
+            return Ok();
+        }
+    }
+}

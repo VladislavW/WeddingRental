@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.authenticationService.isAuthorized()
             .subscribe((auth: any) => {
-                const isAuthenticated = auth.isAuthenticated;
+                const isAuthenticated = auth.json().isAuthenticated;
 
                 this.authManagerService.authState.next(isAuthenticated);
 

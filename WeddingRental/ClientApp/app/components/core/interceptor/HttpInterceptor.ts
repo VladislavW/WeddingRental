@@ -48,6 +48,19 @@ export class HttpInterceptor extends Http {
             });
     }
 
+    put(url: string, body: any,  options?: RequestOptionsArgs): Observable<any> {
+        return super.put(url, body, this.requestOptions(options))
+            .catch(HttpInterceptor.onCatch)
+            .do((res: Response) => {
+                HttpInterceptor.onSuccess(res);
+            }, (error: any) => {
+                HttpInterceptor.onError(error);
+            })
+            .finally(() => {
+                this.onFinally();
+            });
+    }
+
 
     // Implement POST, PUT, DELETE HERE
 

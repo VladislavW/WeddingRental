@@ -13,6 +13,7 @@ import {SharedModule} from "../shared/shared.module";
 import {HttpInterceptor} from "./interceptor/HttpInterceptor";
 import {RequestOptions, XHRBackend} from "@angular/http";
 import {ToastyConfig, ToastyService} from "ng2-toasty";
+import {CatalogService} from "./services/catalog.service";
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ export class CoreModule {
                 ToastyService,
                 AuthManagerService,
                 AuthenticationService,
+                CatalogService,
                 AdminGuard,
                 AuthorizedGuard,
                 UnauthrizedGuard,

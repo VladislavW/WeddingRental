@@ -11,6 +11,10 @@ export const routes: Routes = [
         loadChildren: './components/home/home.module#HomeModule'
     },
     {
+        path: 'catalog',
+        loadChildren: './components/catalog/catalog.module#CatalogModule'
+    },
+    {
         path: 'auth',
         loadChildren: './components/auth/auth.module#AuthModule'
     },

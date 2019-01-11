@@ -7,6 +7,9 @@ namespace Data.Persistence
     public interface IUnitOfWork
     {
         IUserRepository UserRepository { get; }
+        IOrderRepository OrderRepository { get; }
+        ITerritoryRepository TerritoryRepository { get; }
+        IProductRepository ProductRepository { get; }
         Task<int> CompleteAsync();
 
         Task<List<T>> QueryAsync<T>(string sql, object param = null);

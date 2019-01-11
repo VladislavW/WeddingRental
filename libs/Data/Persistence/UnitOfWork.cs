@@ -29,9 +29,21 @@ namespace Data.Persistence
         }
         
         private IUserRepository _userRepository;
+        private IOrderRepository _orderRepository;
+        private ITerritoryRepository _territoryRepository;
+        private IProductRepository _productRepository;
 
         public IUserRepository UserRepository =>
             _userRepository ?? (_userRepository = CreateRepository<IUserRepository>());
+        
+        public IOrderRepository OrderRepository =>
+            _orderRepository ?? (_orderRepository = CreateRepository<IOrderRepository>());
+        
+        public ITerritoryRepository TerritoryRepository =>
+            _territoryRepository ?? (_territoryRepository = CreateRepository<ITerritoryRepository>());
+        
+        public IProductRepository ProductRepository =>
+            _productRepository ?? (_productRepository = CreateRepository<IProductRepository>());
 
         public async Task<int> CompleteAsync()
         {

@@ -5,11 +5,11 @@ using Core.Base;
 
 namespace Data.Persistence
 {
-    internal class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly WeddingRentalDbContext _context;
         
-        public Repository(WeddingRentalDbContext context, IQueryable<TEntity> source)
+        public Repository(WeddingRentalDbContext context)
         {
             _context = context;
         }

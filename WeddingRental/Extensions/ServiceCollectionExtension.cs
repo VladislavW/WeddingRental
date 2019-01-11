@@ -35,11 +35,15 @@ namespace WeddingRental.Extensions
         public static void AddServices(this IServiceCollection services)
         {
             services.TryAdd(ServiceDescriptor.Scoped(typeof(IUserService), typeof(UserService)));
+            services.TryAdd(ServiceDescriptor.Scoped(typeof(IProductService), typeof(ProductService)));
         }   
         
         public static void AddRepositories(this IServiceCollection services)
         {
            services.TryAdd(ServiceDescriptor.Scoped(typeof(IUserRepository), typeof(UserRepository)));
+           services.TryAdd(ServiceDescriptor.Scoped(typeof(IOrderRepository), typeof(OrderRepository)));
+           services.TryAdd(ServiceDescriptor.Scoped(typeof(IProductRepository), typeof(ProductRepository)));
+           services.TryAdd(ServiceDescriptor.Scoped(typeof(ITerritoryRepository), typeof(TerritoryRepository)));
         }
         
         public static void AddUnitOfWorks(this IServiceCollection services)

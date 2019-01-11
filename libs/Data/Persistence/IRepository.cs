@@ -5,7 +5,7 @@ using Core.Base;
 
 namespace Data.Persistence
 {
-    internal interface IRepository<TEntity> where TEntity : BaseEntity
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         IQueryable<TEntity> Source { get; }
         
