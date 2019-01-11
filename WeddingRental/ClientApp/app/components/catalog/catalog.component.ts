@@ -21,6 +21,8 @@ export class CatalogComponent implements OnInit {
     productName: string;
     productNumber: string;
     
+    showAddButtons: boolean;
+    
     constructor(
         private catalogService: CatalogService,
         private orderService: OrderService,
@@ -44,6 +46,8 @@ export class CatalogComponent implements OnInit {
                     this.authenticationService.getPermission()
                         .subscribe((role: any) => {
                             this.showAddNewProductBlock = !!role && role.toLowerCase() === 'admin';
+                            
+                            this.showAddButtons =  !this.showAddNewProductBlock && isAuthenticated;
                         });
                 }
             })
@@ -68,14 +72,13 @@ export class CatalogComponent implements OnInit {
 
     addToOrder(product: CatalogModel):void{    
         var mod = {
-            productId : product.productId,
-            orderId : this.localStorageService.get('orderId')            
+            productId : product.productId          
         };
         
         this.orderService
             .addToOrder(mod)
             .subscribe((item)=>{
-                this.localStorageService.set('orderId', item.json(), 300000);
+                this.router.navigate(['/order']);
             });
     }
 

@@ -12,5 +12,6 @@ namespace Data.Repositories
         Task<List<ProductCatalogView>> GetProductCatalogViewsByOrderAsync(int orderId);
         Task AddNewProductAsync(Product newProduct);
         Task<Product> GetProductAsync(int productId);
+        Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync();
     }
 }

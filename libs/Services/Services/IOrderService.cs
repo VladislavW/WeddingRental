@@ -6,7 +6,7 @@ namespace Services.Services
     public interface IOrderService
     {
         Task<OrderView> GetOrderViewsAsync(int userId);
-        Task<int?> AddProductToOrderAsync(int productId, int? orderId, int userId);
+        Task<int?> AddProductToOrderAsync(int productId, int userId);
         Task SubmitAsync(int orderId);
     }
 }

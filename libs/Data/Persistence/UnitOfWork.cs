@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Data.Repositories;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,6 +33,7 @@ namespace Data.Persistence
         private IOrderRepository _orderRepository;
         private ITerritoryRepository _territoryRepository;
         private IProductRepository _productRepository;
+        private IRepository<OrderProduct> _orderProductRepository;
 
         public IUserRepository UserRepository =>
             _userRepository ?? (_userRepository = CreateRepository<IUserRepository>());
@@ -44,6 +46,9 @@ namespace Data.Persistence
         
         public IProductRepository ProductRepository =>
             _productRepository ?? (_productRepository = CreateRepository<IProductRepository>());
+        
+        public IRepository<OrderProduct> OrderProductRepository =>
+            _orderProductRepository ?? (_orderProductRepository = CreateRepository<IRepository<OrderProduct>>());
 
         public async Task<int> CompleteAsync()
         {

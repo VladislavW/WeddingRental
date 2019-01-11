@@ -10,7 +10,7 @@
     <tr>
         <th scope="row">{{product.productNumber}}</th>
         <td>{{product.productName}}</td>
-        <td><button type="submit" class="btn btn-primary pull-right" (click)="addToOrder(product)" i18n>Add To Order</button></td>
+        <td *ngIf="showAddButtons"><button type="submit" class="btn btn-primary pull-right" (click)="addToOrder(product)" i18n>Add To Order</button></td>
     </tr>  
     </tbody>
 </table>

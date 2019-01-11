@@ -27,12 +27,12 @@
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
                 </li>
-                <li *ngIf="isAuthorized" [routerLinkActive]="['link-active']">
+                <li *ngIf="isAuthorized && !isAdmin" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/order']">
                         <span class='glyphicon glyphicon-home'></span> Order
                     </a>
                 </li>
-                <li  *ngIf="isAuthorized" [routerLinkActive]="['link-active']">
+                <li  *ngIf="isAuthorized && isAdmin" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/fetch-data']">
                         <span class='glyphicon glyphicon-th-list'></span> Fetch data
                     </a>

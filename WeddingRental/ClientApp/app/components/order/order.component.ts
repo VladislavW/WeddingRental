@@ -50,6 +50,9 @@ export class OrderComponent implements OnInit {
     submitOrder(orderId: number):void{
         this.orderService
             .submitOrder(orderId)
-            .subscribe();
+            .subscribe(()=>{
+                this.ngOnInit();
+                this.router.navigate(['/catalog']);
+            });
     }
 }

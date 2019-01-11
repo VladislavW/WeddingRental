@@ -23,6 +23,7 @@ namespace Data.Persistence
             builder.ApplyConfiguration(new TerritoryMap());
             builder.ApplyConfiguration(new OrderMap());
             builder.ApplyConfiguration(new ProductMap());
+            builder.ApplyConfiguration(new OrderProductMap());
 
             base.OnModelCreating(builder);
 
@@ -32,6 +33,7 @@ namespace Data.Persistence
             builder.Entity<Territory>(new TerritoryMap().Configure);
             builder.Entity<Order>(new OrderMap().Configure);
             builder.Entity<Product>(new ProductMap().Configure);
+            builder.Entity<OrderProduct>(new OrderProductMap().Configure);
 
             builder.Entity<IdentityUserClaim<int>>().ToTable("UserClaim");
             builder.Entity<IdentityUserRole<int>>().ToTable("UserRole");

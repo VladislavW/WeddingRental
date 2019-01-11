@@ -41,6 +41,7 @@ namespace WeddingRental.Extensions
         
         public static void AddRepositories(this IServiceCollection services)
         {
+            services.TryAdd(ServiceDescriptor.Scoped(typeof(IRepository<>), typeof(Repository<>)));
            services.TryAdd(ServiceDescriptor.Scoped(typeof(IUserRepository), typeof(UserRepository)));
            services.TryAdd(ServiceDescriptor.Scoped(typeof(IOrderRepository), typeof(OrderRepository)));
            services.TryAdd(ServiceDescriptor.Scoped(typeof(IProductRepository), typeof(ProductRepository)));
