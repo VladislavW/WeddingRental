@@ -1,0 +1,49 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col" *ngIf="showAddNewProductBlock">Add</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let product of products">
+    <tr>
+        <th scope="row">{{product.productNumber}}</th>
+        <td>{{product.productName}}</td>
+    </tr>  
+    </tbody>
+</table>
+
+<table *ngIf="showAddNewProductBlock">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Add</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">
+            <input class="form-control"
+                   id="ProductNumber"
+                   placeholder="Product Number"
+                   name="ProductNumber"
+                   [(ngModel)]="productNumber"
+                   type="text"
+                   required/>
+
+        </th>
+        <th scope="row">
+            <input class="form-control"
+                   id="ProductName"
+                   placeholder="Name"
+                   name="email"
+                   [(ngModel)]="productName"
+                   type="text"
+                   required/>
+        </th>
+        <td> <button type="submit" class="btn btn-primary pull-right" (click)="addNewProduct()" i18n>Add New Product</button></td>
+    </tr>
+    </tbody>
+</table>
