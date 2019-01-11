@@ -25,7 +25,7 @@ namespace WeddingRental.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
-            var rng = _userService.GetUserIdsAsync().Result.Sum();
+            var rng = _userService.GetUserCountAsync().Result;
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 DateFormatted = DateTime.Now.AddDays(index).ToString("d"),

@@ -84,16 +84,12 @@ namespace WeddingRental
                         .Build();
 
                     options.Filters.Add(new AuthorizeFilter(policy));
-
-                  //  options.Filters.Add(new RequireHttpsAttribute());
                     options.Filters.Add(new ExceptionHandlerAttribute());
                 })
                 .AddFluentValidation(fv =>   
                 {  
                     fv.RegisterValidatorsFromAssemblyContaining<Startup>(); 
                 });  
-
-            // services.AddAuthorizationPolicies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,9 +119,19 @@ namespace WeddingRental
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
-                routes.MapSpaFallbackRoute(
+//                routes.MapSpaFallbackRoute(
+//                    name: "spa-fallback",
+//                    defaults: new { controller = "Home", action = "Index" });
+                
+                routes.MapRoute(
                     name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                    template: "{*.}",
+                    defaults: new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                    }
+                );
             });
         }
     }

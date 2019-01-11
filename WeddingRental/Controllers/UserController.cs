@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Services.Descriptors;
 using Services.Services;
 using WeddingRental.Models.User.From;
 using WeddingRental.Models.User.To;
@@ -44,6 +45,15 @@ namespace WeddingRental.Controllers
                 return Ok();
             }
 
+            var userCount = await _userService.GetUserCountAsync();
+            if (userCount == 0)
+            {
+                var admin = _mapper.Map<AdminDescriptor>(model);
+
+                await _userService.CreateAdministratorAsync(admin);
+                return Redirect("/home");
+            }
+            
             var user = _mapper.Map<User>(model);
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
@@ -100,9 +110,10 @@ namespace WeddingRental.Controllers
         
         [HttpPost]
         [Route("[action]")]
-        public async void SignOut()
+        public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
+            return Redirect("/home");
         }
         
         [HttpGet]

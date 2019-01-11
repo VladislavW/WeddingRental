@@ -5,6 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Migrations\20190111110218_0001_Order.cs" />
+      <Compile Remove="Migrations\20190111111805_0002_Order.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\Core\Core.csproj" />
       <ProjectReference Include="..\Entities\Entities.csproj" />
     </ItemGroup>

@@ -10,6 +10,11 @@ namespace Data.Mapping
         public override void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("User");
+            
+            builder.HasOne(item => item.Territory)
+                .WithMany()
+                .HasForeignKey(item => item.TerritoryId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

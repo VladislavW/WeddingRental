@@ -28,7 +28,7 @@ export class AuthenticationService {
         return this.http.get(this.actionUrl + '/claims')
             .map((claims: any) => {
                 let role: any;
-                claims.map((item: any) => {
+                claims.json().map((item: any) => {
                     if (item.type === 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role') {
                         role = item.value;
                     }

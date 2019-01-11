@@ -4,14 +4,16 @@ using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(WeddingRentalDbContext))]
-    partial class WeddingRentalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190111111739_0001_Order")]
+    partial class _0001_Order
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,65 +102,13 @@ namespace Data.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Entities.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("CreateOnUtc");
-
-                    b.Property<string>("OrderNumber")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("Entities.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Color")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(1);
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(5000);
-
-                    b.Property<string>("Number")
-                        .HasMaxLength(100);
-
-                    b.Property<int?>("OrderId");
-
-                    b.Property<int>("Type")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(1);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Product");
-                });
-
             modelBuilder.Entity("Entities.Territory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CountryName")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<string>("CountryName");
 
                     b.HasKey("Id");
 
@@ -253,22 +203,6 @@ namespace Data.Migrations
                     b.HasOne("Entities.Territory", "Territory")
                         .WithMany()
                         .HasForeignKey("TerritoryId")
-                        .OnDelete(DeleteBehavior.SetNull);
-                });
-
-            modelBuilder.Entity("Entities.Order", b =>
-                {
-                    b.HasOne("Entities.Identity.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Entities.Product", b =>
-                {
-                    b.HasOne("Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 

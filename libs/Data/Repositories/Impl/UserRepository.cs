@@ -18,11 +18,11 @@ namespace Data.Repositories.Impl
             _context = context;
         }
         
-        public async Task<int[]> GetUserIdsAsync()
+        public async Task<int> GetUserCountAsync()
         {
             return await _context.Set<User>()
                 .Select(item => item.Id)
-                .ToArrayAsync();
+                .CountAsync();
         }
     }
 }

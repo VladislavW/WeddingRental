@@ -7,6 +7,6 @@ namespace Data.Repositories
 {
     public interface IUserRepository
     {
-        Task<int[]> GetUserIdsAsync();
+        Task<int> GetUserCountAsync();
     }
 }
