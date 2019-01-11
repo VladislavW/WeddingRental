@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Repositories;
+using Entities;
 
 namespace Data.Persistence
 {
@@ -10,6 +11,7 @@ namespace Data.Persistence
         IOrderRepository OrderRepository { get; }
         ITerritoryRepository TerritoryRepository { get; }
         IProductRepository ProductRepository { get; }
+        IRepository<OrderProduct> OrderProductRepository { get; }
         Task<int> CompleteAsync();
 
         Task<List<T>> QueryAsync<T>(string sql, object param = null);

@@ -1,7 +1,8 @@
-
+<p *ngIf="!orderNumber"><em>Loading...</em></p>
 <div class="card">
     <h5 class="card-header">{{orderNumber}}</h5>
     <div class="card-body">
+        <p *ngIf="!products"><em>Loading...</em></p>
         <table class="table">
             <thead>
             <tr>

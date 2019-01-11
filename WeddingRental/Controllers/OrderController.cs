@@ -37,7 +37,7 @@ namespace WeddingRental.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var orderId = await _orderService
-                .AddProductToOrderAsync(model.ProductId, model.OrderId, user.Id);
+                .AddProductToOrderAsync(model.ProductId, user.Id);
             return Ok(orderId);
         }
 

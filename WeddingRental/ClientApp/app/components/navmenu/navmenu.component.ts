@@ -60,7 +60,7 @@ export class NavMenuComponent implements OnInit {
         this.authenticationService
             .signOut()
             .subscribe((data) => {
-                this.router.navigate(['/home']);
+                this.router.navigate(['/']);
             });
     }
     

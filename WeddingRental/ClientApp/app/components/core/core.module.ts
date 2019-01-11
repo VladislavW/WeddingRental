@@ -15,6 +15,7 @@ import {RequestOptions, XHRBackend} from "@angular/http";
 import {ToastyConfig, ToastyService} from "ng2-toasty";
 import {CatalogService} from "./services/catalog.service";
 import {OrderService} from "./services/order.service ";
+import {WithoutroleGuard} from "./guards/withoutrole.guard";
 
 @NgModule({
     imports: [
@@ -38,6 +39,7 @@ export class CoreModule {
                 AdminGuard,
                 AuthorizedGuard,
                 UnauthrizedGuard,
+                WithoutroleGuard,
                 AuthorizeGuard,
                 {
                     provide: HttpInterceptor,

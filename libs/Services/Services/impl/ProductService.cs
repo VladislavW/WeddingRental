@@ -22,9 +22,9 @@ namespace Services.Services.impl
             return _productRepository.GetProductCatalogViewsAsync();
         }
 
-        public Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync(int top)
+        public Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync()
         {
-            throw new System.NotImplementedException();
+            return _productRepository.GetProductCatalogViewsTopAsync();
         }
 
         public Task<List<ProductCatalogView>> GetProductCatalogViewsByOrderAsync(int orderId)

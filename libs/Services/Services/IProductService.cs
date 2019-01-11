@@ -8,7 +8,7 @@ namespace Services.Services
     public interface IProductService
     {
         Task<List<ProductCatalogView>> GetProductCatalogViewsAsync();
-        Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync(int top);
+        Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync();
         Task<List<ProductCatalogView>> GetProductCatalogViewsByOrderAsync(int orderId);
         Task AddNewProductAsync(NewProductDescriptor map);
     }

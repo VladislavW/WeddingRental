@@ -30,15 +30,15 @@ namespace Data.Repositories.Impl
         
         public Task<List<ProductCatalogView>> GetProductCatalogViewsByOrderAsync(int orderId)
         {
-            return Source
+            return _unitOfWork.OrderProductRepository.Source
                 .Where(item => item.OrderId == orderId)
                 .Select(item => new ProductCatalogView
                 {
-                    Type = item.Type,
-                    ProductId = item.Id,
-                    ProductName = item.Name,
-                    ProductColor = item.Color,
-                    ProductNumber = item.Number
+                    Type = item.Product.Type,
+                    ProductId = item.Product.Id,
+                    ProductName = item.Product.Name,
+                    ProductColor = item.Product.Color,
+                    ProductNumber = item.Product.Number
                 }).ToListAsync();
         }
 
@@ -51,6 +51,11 @@ namespace Data.Repositories.Impl
         public async Task<Product> GetProductAsync(int productId)
         {
             return await Source.FirstOrDefaultAsync(item => item.Id == productId);
+        }
+
+        public async Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync()
+        {
+            return await _unitOfWork.StoredProcedureAsync<ProductCatalogView>("dbo.SelectTopProduct");
         }
     }
 }

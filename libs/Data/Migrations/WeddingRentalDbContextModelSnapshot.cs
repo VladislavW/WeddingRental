@@ -125,6 +125,25 @@ namespace Data.Migrations
                     b.ToTable("Order");
                 });
 
+            modelBuilder.Entity("Entities.OrderProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderProduct");
+                });
+
             modelBuilder.Entity("Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -141,15 +160,11 @@ namespace Data.Migrations
                     b.Property<string>("Number")
                         .HasMaxLength(100);
 
-                    b.Property<int?>("OrderId");
-
                     b.Property<int>("Type")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(1);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Product");
                 });
@@ -268,12 +283,17 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Entities.Product", b =>
+            modelBuilder.Entity("Entities.OrderProduct", b =>
                 {
                     b.HasOne("Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

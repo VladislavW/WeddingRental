@@ -13,12 +13,6 @@ namespace Data.Mapping
             builder.ToTable("Product");
             builder.HasKey(item => item.Id);
             builder.Property(item => item.Id).ValueGeneratedOnAdd();
-            
-            builder.HasOne(item => item.Order)
-                .WithMany()
-                .HasForeignKey(item => item.OrderId)
-                .OnDelete(DeleteBehavior.SetNull);
-
             builder.Property(item => item.Number).HasMaxLength(100);
             builder.Property(item => item.Name).HasMaxLength(5000);
             builder.Property(item => item.Type).HasDefaultValue(ProductType.Dress);

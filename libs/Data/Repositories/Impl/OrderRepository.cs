@@ -30,21 +30,25 @@ namespace Data.Repositories.Impl
                 }).FirstOrDefaultAsync();
         }
 
-        public async Task<Order> GetOrderAsync(int? orderId)
+        public async Task<Order> GetOrderByUserAsync(int userId)
         {
-            if (orderId == null)
-            {
-                return null;
-            }
-            
             return await Source
+                .Where(item => item.UserId == userId)
                 .Where(item => item.OrderStatus == OrderStatus.New)
-                .FirstOrDefaultAsync(item => item.Id == orderId.Value);
+                .FirstOrDefaultAsync();
         }
 
         public Task CompleteAsync()
         {
             return _unitOfWork.CompleteAsync();
+        }
+
+        public async Task<Order> GetOrderAsync(int orderId)
+        {
+            return await Source
+                .Where(item => item.Id == orderId)
+                .Where(item => item.OrderStatus == OrderStatus.New)
+                .FirstOrDefaultAsync();
         }
     }
 }
