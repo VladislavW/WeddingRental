@@ -25,4 +25,8 @@ export class CatalogService {
     addNewProduct(newProduct: CatalogModel): Observable<any> {
         return this.http.put(this.actionUrl + '/put', newProduct);
     }
+
+    gerProductsByOrder(orderId : number): Observable<any>{
+        return this.http.get(this.actionUrl + '/getByOrder/'+ orderId);
+    }
 }

@@ -12,5 +12,10 @@ namespace Entities
         
         public int? OrderId { get; set; }
         public Order Order { get; set; }
+
+        public void AddToOrder(Order order)
+        {
+            Order = order;
+        }
     }
 }

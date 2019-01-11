@@ -10,7 +10,7 @@ namespace Services.Services.impl
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        
+
         public ProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
@@ -25,6 +25,11 @@ namespace Services.Services.impl
         public Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync(int top)
         {
             throw new System.NotImplementedException();
+        }
+
+        public Task<List<ProductCatalogView>> GetProductCatalogViewsByOrderAsync(int orderId)
+        {
+            return _productRepository.GetProductCatalogViewsByOrderAsync(orderId);
         }
 
         public async Task AddNewProductAsync(NewProductDescriptor map)

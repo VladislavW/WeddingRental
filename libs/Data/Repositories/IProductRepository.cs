@@ -9,6 +9,8 @@ namespace Data.Repositories
     public interface IProductRepository : IRepository<Product>
     {
         Task<List<ProductCatalogView>> GetProductCatalogViewsAsync();
+        Task<List<ProductCatalogView>> GetProductCatalogViewsByOrderAsync(int orderId);
         Task AddNewProductAsync(Product newProduct);
+        Task<Product> GetProductAsync(int productId);
     }
 }
