@@ -27,11 +27,30 @@ namespace Data.Repositories.Impl
                 ProductNumber = item.Number
             }).ToListAsync();
         }
+        
+        public Task<List<ProductCatalogView>> GetProductCatalogViewsByOrderAsync(int orderId)
+        {
+            return Source
+                .Where(item => item.OrderId == orderId)
+                .Select(item => new ProductCatalogView
+                {
+                    Type = item.Type,
+                    ProductId = item.Id,
+                    ProductName = item.Name,
+                    ProductColor = item.Color,
+                    ProductNumber = item.Number
+                }).ToListAsync();
+        }
 
         public async Task AddNewProductAsync(Product newProduct)
         {
             Add(newProduct);
             await _unitOfWork.CompleteAsync();
+        }
+
+        public async Task<Product> GetProductAsync(int productId)
+        {
+            return await Source.FirstOrDefaultAsync(item => item.Id == productId);
         }
     }
 }

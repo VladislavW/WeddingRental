@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 
 
 @Injectable()
-export class CatalogService {
+export class OrderService {
     public returnUrl: string = '';
     private readonly actionUrl: string;
 
@@ -22,18 +22,18 @@ export class CatalogService {
    //         });
    // }
 
-    getOrder(userId: number){
-        return this.http.get(this.actionUrl + '/get/'+ userId)
+    getOrder(){
+        return this.http.get(this.actionUrl + '/get')
             .map((model: any) => {
                 return model.json();
             });
     }
 
-    addToOrder(product: CatalogModel): Observable<any>{
+    addToOrder(product: any): Observable<any>{
         return this.http.put(this.actionUrl + '/put', product);
     }
 
-    submitOrder(): Observable<any>{
-        return this.http.get(this.actionUrl + '/submit');
+    submitOrder(orderId : any): Observable<any>{
+        return this.http.post(this.actionUrl + '/submit',  {orderId});
     }
 }

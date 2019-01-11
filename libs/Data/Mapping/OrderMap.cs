@@ -1,3 +1,4 @@
+using Core.Enums;
 using Data.Infrastructure;
 using Entities;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace Data.Mapping
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(item => item.OrderNumber).HasMaxLength(100).IsRequired();
+            builder.Property(item => item.OrderStatus).HasDefaultValue(OrderStatus.New);
         }
     }
 }

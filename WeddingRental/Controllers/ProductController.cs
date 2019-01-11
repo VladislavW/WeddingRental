@@ -31,6 +31,14 @@ namespace WeddingRental.Controllers
             return Json(views);
         }
         
+        [HttpGet]
+        [Route("[action]/{orderId}")]
+        public async Task<JsonResult> GetByOrder(int orderId)
+        {
+            var views = await _productService.GetProductCatalogViewsByOrderAsync(orderId);
+            return Json(views);
+        }
+        
         [HttpPut]
         [Route("[action]")]
         [Authorize(Roles = "admin")]

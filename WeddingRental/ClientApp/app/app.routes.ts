@@ -15,6 +15,10 @@ export const routes: Routes = [
         loadChildren: './components/catalog/catalog.module#CatalogModule'
     },
     {
+        path: 'order',
+        loadChildren: './components/order/order.module#OrderModule'
+    },
+    {
         path: 'auth',
         loadChildren: './components/auth/auth.module#AuthModule'
     },

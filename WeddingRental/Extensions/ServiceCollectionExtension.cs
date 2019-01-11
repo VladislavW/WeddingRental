@@ -36,6 +36,7 @@ namespace WeddingRental.Extensions
         {
             services.TryAdd(ServiceDescriptor.Scoped(typeof(IUserService), typeof(UserService)));
             services.TryAdd(ServiceDescriptor.Scoped(typeof(IProductService), typeof(ProductService)));
+            services.TryAdd(ServiceDescriptor.Scoped(typeof(IOrderService), typeof(OrderService)));
         }   
         
         public static void AddRepositories(this IServiceCollection services)

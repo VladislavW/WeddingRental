@@ -14,6 +14,7 @@ import {HttpInterceptor} from "./interceptor/HttpInterceptor";
 import {RequestOptions, XHRBackend} from "@angular/http";
 import {ToastyConfig, ToastyService} from "ng2-toasty";
 import {CatalogService} from "./services/catalog.service";
+import {OrderService} from "./services/order.service ";
 
 @NgModule({
     imports: [
@@ -33,6 +34,7 @@ export class CoreModule {
                 AuthManagerService,
                 AuthenticationService,
                 CatalogService,
+                OrderService,
                 AdminGuard,
                 AuthorizedGuard,
                 UnauthrizedGuard,

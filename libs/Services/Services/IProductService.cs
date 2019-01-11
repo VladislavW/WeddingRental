@@ -9,6 +9,7 @@ namespace Services.Services
     {
         Task<List<ProductCatalogView>> GetProductCatalogViewsAsync();
         Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync(int top);
+        Task<List<ProductCatalogView>> GetProductCatalogViewsByOrderAsync(int orderId);
         Task AddNewProductAsync(NewProductDescriptor map);
     }
 }

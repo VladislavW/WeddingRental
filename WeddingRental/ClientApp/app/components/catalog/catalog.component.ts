@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CatalogService} from '../core/services/catalog.service';
 import {CatalogModel} from "../core/models/catalogModel";
 import {AuthenticationService} from "../core/services/authentication.service";
+import {OrderService} from "../core/services/order.service ";
+import {LocalStorageService} from "../core/services/local-storage.service";
 
 @Component({
     selector: 'catalog',
@@ -21,9 +23,11 @@ export class CatalogComponent implements OnInit {
     
     constructor(
         private catalogService: CatalogService,
+        private orderService: OrderService,
         private authenticationService: AuthenticationService,
         private router: Router,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private localStorageService: LocalStorageService
     ) {
 
     }
@@ -60,6 +64,19 @@ export class CatalogComponent implements OnInit {
         this.newProduct.productNumber = this.productNumber;
         this.newProduct.productName = this.productName;        
         this.catalogService.addNewProduct(this.newProduct).subscribe(()=> this.loadProducts());
+    }
+
+    addToOrder(product: CatalogModel):void{    
+        var mod = {
+            productId : product.productId,
+            orderId : this.localStorageService.get('orderId')            
+        };
+        
+        this.orderService
+            .addToOrder(mod)
+            .subscribe((item)=>{
+                this.localStorageService.set('orderId', item.json(), 300000);
+            });
     }
 
     
