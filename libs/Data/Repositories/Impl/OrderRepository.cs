@@ -50,5 +50,13 @@ namespace Data.Repositories.Impl
                 .Where(item => item.OrderStatus == OrderStatus.New)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> HasOrderColorAsync(Color productColor, int userId)
+        {
+            return await _unitOfWork.OrderProductRepository.Source
+                .Where(item => item.Order.UserId == userId)
+                .Where(item => item.Order.OrderStatus == OrderStatus.New)
+                .AnyAsync(item => item.Product.Color == productColor);
+        }
     }
 }

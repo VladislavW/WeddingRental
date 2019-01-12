@@ -1,11 +1,15 @@
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Core.Enums;
+using Core.Exceptions;
 using Data.Persistence;
 using Data.Repositories;
 using Data.Views;
 using Entities;
 using Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using Services.Extensions;
 
 namespace Services.Services.impl
 {
@@ -37,6 +41,11 @@ namespace Services.Services.impl
             {
                 return null;
             }
+
+            if(await product.Color.CanNotAddToOrder(userId, _orderRepository.HasOrderColorAsync))
+            {
+                throw new BusinessException("Order can`t contains yellow and red colors"); 
+            };
 
             var order = await _orderRepository.GetOrderByUserAsync(userId);
             if (order == null)

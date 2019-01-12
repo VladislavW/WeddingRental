@@ -8,12 +8,16 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Color</th>
+                <th scope="col">Type</th>
             </tr>
             </thead>
             <tbody *ngFor="let product of products">
             <tr>
                 <th scope="row">{{product.productNumber}}</th>
                 <td>{{product.productName}}</td>
+                <td>{{colorToString(product.productColor)}}</td>
+                <td>{{typeToString(product.type)}}</td>
             </tr>
             </tbody>
         </table>

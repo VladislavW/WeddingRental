@@ -9,12 +9,16 @@
         <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Color</th>
+            <th>Type</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let forecast of forecasts">
             <td>{{ forecast.productNumber }}</td>
             <td>{{ forecast.productName }}</td>
+            <td>{{colorToString(forecast.productColor)}}</td>
+            <td>{{typeToString(forecast.type)}}</td>
         </tr>
     </tbody>
 </table>
