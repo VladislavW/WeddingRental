@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Enums;
 using Data.Repositories;
 using Data.Views;
 using Entities;
@@ -17,8 +18,14 @@ namespace Services.Services.impl
         }
 
 
-        public Task<List<ProductCatalogView>> GetProductCatalogViewsAsync()
+        public Task<List<ProductCatalogView>> GetProductCatalogViewsByUserCountryAsync(string countryName)
         {
+            if (countryName == "Japan")
+            {
+                return _productRepository
+                    .GetProductCatalogViewsWithoutTypeAndColorAsync(ProductType.Flowers, Color.White);
+            }
+
             return _productRepository.GetProductCatalogViewsAsync();
         }
 

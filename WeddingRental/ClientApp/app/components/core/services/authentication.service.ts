@@ -24,6 +24,10 @@ export class AuthenticationService {
             .do(value => this.isLoggedIn = true);
     }
 
+    getTerritories(): Observable<any> {
+        return this.http.get(this.actionUrl + '/getTerritories');
+    }
+
     getPermission() {
         return this.http.get(this.actionUrl + '/claims')
             .map((claims: any) => {

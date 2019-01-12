@@ -8,5 +8,6 @@ namespace Data.Repositories
     public interface IUserRepository
     {
         Task<int> GetUserCountAsync();
+        Task<string> GetCountryNameByAsync(int userId);
     }
 }
