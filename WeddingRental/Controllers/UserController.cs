@@ -103,8 +103,6 @@ namespace WeddingRental.Controllers
         [Route("[action]")]
         public async Task<IActionResult> SuccessSignIn()
         {
-            //var isContactExist = await _userService.IsContactExistAsync(User.GetUserId());
-            //new LoginModel(isContactExist)
             return Ok();
         }
         
@@ -113,7 +111,7 @@ namespace WeddingRental.Controllers
         public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
-            return Redirect("/home");
+            return RedirectToAction("SuccessSignIn", "User");
         }
         
         [HttpGet]

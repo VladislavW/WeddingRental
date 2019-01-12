@@ -37,7 +37,9 @@ namespace Services.Services.impl
             var newProduct = new Product
             {
                 Name = map.ProductName,
-                Number = map.ProductNumber
+                Number = map.ProductNumber,
+                Type = map.Type,
+                Color = map.ProductColor
             };
 
             await _productRepository.AddNewProductAsync(newProduct);

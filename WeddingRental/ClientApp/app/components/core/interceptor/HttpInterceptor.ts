@@ -10,6 +10,9 @@ import {
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
+declare var jquery:any;
+declare var $ :any;
+
 import {LocalStorageService} from "../services/local-storage.service";
 
 @Injectable()
@@ -110,7 +113,8 @@ export class HttpInterceptor extends Http {
      * @param error
      */
     private static onError(error: any): void {
-        console.log(error);
+            $("#error").html(error.statusText);
+            $('#myModal').modal("show");
         //this.notifyService.alertWarning(error.statusText);
     }
 

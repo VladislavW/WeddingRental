@@ -3,13 +3,17 @@
     <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th scope="col"></th>
+        <th scope="col">Color</th>
+        <th scope="col">Type</th>
+        <th *ngIf="showAddButtons" scope="col"></th>
     </tr>
     </thead>
     <tbody *ngFor="let product of products">
     <tr>
         <th scope="row">{{product.productNumber}}</th>
         <td>{{product.productName}}</td>
+        <td>{{colorToString(product.productColor)}}</td>
+        <td>{{typeToString(product.type)}}</td>
         <td *ngIf="showAddButtons"><button type="submit" class="btn btn-primary pull-right" (click)="addToOrder(product)" i18n>Add To Order</button></td>
     </tr>  
     </tbody>
@@ -20,6 +24,8 @@
     <tr>
         <th scope="col">#</th>
         <th scope="col">First</th>
+        <th scope="col">Color</th>
+        <th scope="col">Type</th>
         <th scope="col">Add</th>
     </tr>
     </thead>
@@ -43,6 +49,16 @@
                    [(ngModel)]="productName"
                    type="text"
                    required/>
+        </th>   
+        <th scope="row">
+            <select title="Pick a color" [(ngModel)]="productColor" class="form-control" >
+                <option *ngFor="let item of productColorUI | keys" [value]="item.key">{{item.value}}</option>
+            </select>
+        </th>
+        <th scope="row">
+            <select title="Pick a color" [(ngModel)]="productType" class="form-control">
+                <option *ngFor="let item of productTypeUI | keys" [value]="item.key">{{item.value}}</option>
+            </select>
         </th>
         <td> <button type="submit" class="btn btn-primary pull-right" (click)="addNewProduct()" i18n>Add New Product</button></td>
     </tr>

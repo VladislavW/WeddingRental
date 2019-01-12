@@ -18,7 +18,6 @@ export class UnauthrizedGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         return this.authenticationService.isAuthorized()
             .map((auth: any) => {
-                debugger;
                 const isAuthorized = auth.json().isAuthenticated;
 
                 this.authManagerService.authState.next(isAuthorized);

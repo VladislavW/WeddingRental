@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {CatalogService} from '../core/services/catalog.service';
-import {CatalogModel} from "../core/models/catalogModel";
+import {CatalogModel, Color, ProductType} from "../core/models/catalogModel";
 import {AuthenticationService} from "../core/services/authentication.service";
 import {OrderModel} from "../core/models/orderModel";
 import {OrderService} from "../core/services/order.service ";
+import {EnumExtension} from "../core/models/enumExtension";
 
 @Component({
     selector: 'order',
@@ -36,6 +37,14 @@ export class OrderComponent implements OnInit {
            this.orderNumber = this.order.orderNumber;
            this.loadProducts( this.order.orderId);
        });
+    }
+    
+    colorToString(color: Color){
+        return EnumExtension.colorToString(color);
+    }
+
+    typeToString(type: ProductType){
+        return EnumExtension.typeToString(type);
     }
     
     loadProducts(orderId: number):void{

@@ -56,16 +56,23 @@ namespace Data.Migrations
                 column: "ProductId");
 
             migrationBuilder.Sql(@"CREATE PROCEDURE [dbo].[SelectTopProduct]
-
 AS
 BEGIN
-	SELECT top 10 * FROM dbo.Product as prod 
+	SELECT top 10 
+	prod.Name as ProductName,
+	prod.Color as ProductColor,
+	prod.Id as ProductId,
+	prod.Number as ProductNumber,
+	prod.Type as Type
+
+	 FROM dbo.Product as prod 
       outer apply (
          select count(*) Count
          from dbo.OrderProduct as op
          where  op.ProductId = prod.Id
       ) UsedProducts
 
+	  where prod.Type = 1 -- dress
 	  Order By UsedProducts.Count DESC
 END
 ");

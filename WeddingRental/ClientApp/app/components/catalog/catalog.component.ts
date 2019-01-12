@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {CatalogService} from '../core/services/catalog.service';
-import {CatalogModel} from "../core/models/catalogModel";
+import {CatalogModel, Color, ProductType} from "../core/models/catalogModel";
 import {AuthenticationService} from "../core/services/authentication.service";
 import {OrderService} from "../core/services/order.service ";
 import {LocalStorageService} from "../core/services/local-storage.service";
+import {KeysPipe} from "../core/pipes/keys-pipe";
+import {EnumExtension} from "../core/models/enumExtension";
 
 @Component({
     selector: 'catalog',
@@ -20,6 +22,10 @@ export class CatalogComponent implements OnInit {
     newProduct: CatalogModel;
     productName: string;
     productNumber: string;
+    productColor: Color;
+    productColorUI = Color;
+    productType: ProductType;
+    productTypeUI = ProductType;
     
     showAddButtons: boolean;
     
@@ -54,6 +60,14 @@ export class CatalogComponent implements OnInit {
             
     }
     
+    colorToString(color: Color){
+       return EnumExtension.colorToString(color);
+    }
+
+    typeToString(type: ProductType){
+        return EnumExtension.typeToString(type);
+    }
+    
     loadProducts():void{
         var that = this;
         this.catalogService
@@ -67,6 +81,8 @@ export class CatalogComponent implements OnInit {
         this.newProduct = new CatalogModel();
         this.newProduct.productNumber = this.productNumber;
         this.newProduct.productName = this.productName;        
+        this.newProduct.productColor = this.productColor;        
+        this.newProduct.type = this.productType;        
         this.catalogService.addNewProduct(this.newProduct).subscribe(()=> this.loadProducts());
     }
 

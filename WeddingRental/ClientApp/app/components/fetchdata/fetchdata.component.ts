@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import {CatalogModel} from "../core/models/catalogModel";
+import {CatalogModel, Color, ProductType} from "../core/models/catalogModel";
+import {EnumExtension} from "../core/models/enumExtension";
 
 @Component({
     selector: 'fetchdata',
@@ -14,4 +15,13 @@ export class FetchDataComponent {
             this.forecasts = result.json() as CatalogModel[];
         }, error => console.error(error));
     }
+
+    colorToString(color: Color){
+        return EnumExtension.colorToString(color);
+    }
+
+    typeToString(type: ProductType){
+        return EnumExtension.typeToString(type);
+    }
+
 }
