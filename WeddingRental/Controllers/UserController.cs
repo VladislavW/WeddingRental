@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Data.Views;
 using Entities.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -58,6 +59,7 @@ namespace WeddingRental.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await _userService.UpdateTerritoryAsync(user, model.TerritoryId);
                 await _signInManager.SignInAsync(user, false);
                 return Ok();
             }
@@ -98,6 +100,16 @@ namespace WeddingRental.Controllers
         {
             return Json(new {isAuthenticated = User.Identity.IsAuthenticated});
         }
+        
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("[action]")]
+        public async Task<List<TerritoryView>> GetTerritories()
+        {
+            var territories = await _userService.GetTerritoriesAsync();
+            return territories;
+        }
+
         
         [HttpGet]
         [Route("[action]")]

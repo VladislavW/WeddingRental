@@ -1,6 +1,6 @@
 <div class="container">
     <div id="loginForm" class="col-md-8 col-md-offset-2 indent-top-2x">
-        <form autocomplete="" class="form-horizontal" method="post" novalidate="novalidate">
+        <form autocomplete="on" class="form-horizontal" method="post" novalidate="novalidate">
             <div class="row">
                 Sign In 
             </div>
@@ -47,18 +47,18 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="Password" i18n>Confirm Password:</label>
+                        <label for="ConfirmPassword" i18n>Confirm Password:</label>
                         <div >
                             <input class="form-control"
                                    id="ConfirmPassword"
                                    placeholder="ConfirmPassword"
                                    name="confirmPassword"
-                                   [(ngModel)]="confirmPassword"
-                                   #passwordVal="ngModel"
+                                   [(ngModel)]="confirmpassword"
+                                   #confirmPassword="ngModel"
                                    type="password"
                                    required>
-                            <div [hidden]="passwordVal.pristine || passwordVal.valid" class="has-error">
-                                <label class="control-label" [hidden]="!passwordVal.errors?.required" i18n>
+                            <div [hidden]="confirmPassword.pristine || confirmPassword.valid" class="has-error">
+                                <label class="control-label" [hidden]="!confirmPassword.errors?.required" i18n>
                                     This field is required
                                 </label>
                             </div>
@@ -66,7 +66,14 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary pull-right" [disabled]="passwordVal.invalid || emailVal.invalid" (click)="signUp()" i18n>Sign Up</button>
+                        <label for="Territory" i18n>Country:</label>
+                        <select title="Pick a color" id="Territory" name="TerritoryId" [(ngModel)]="territoryid"  #territoryId="ngModel" class="form-control" >
+                            <option *ngFor="let item of territories" [value]="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary pull-right" [disabled]="passwordVal.invalid|| confirmPassword.invalid || emailVal.invalid" (click)="signUp()" i18n>Sign Up</button>
                         <a [routerLink]="['/auth']" i18n>Sign In</a>
                         <br/>
                     </div>

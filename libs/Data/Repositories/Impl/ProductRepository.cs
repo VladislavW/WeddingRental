@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Enums;
 using Data.Persistence;
 using Data.Views;
 using Entities;
@@ -56,6 +58,27 @@ namespace Data.Repositories.Impl
         public async Task<List<ProductCatalogView>> GetProductCatalogViewsTopAsync()
         {
             return await _unitOfWork.StoredProcedureAsync<ProductCatalogView>("dbo.SelectTopProduct");
+        }
+
+        public Task<List<ProductCatalogView>> GetProductCatalogViewsWithoutTypeAndColorAsync(ProductType flowers,
+            Color white)
+        {
+            var whiteFlowersQuery = Source
+                .Where(item => item.Type == flowers)
+                .Where(item => item.Color == white)
+                .Select(item => item.Id);
+            
+            return Source
+                .Where(item=>!whiteFlowersQuery.Contains(item.Id))
+                .Select(item => new ProductCatalogView
+                {
+                    Type = item.Type,
+                    ProductId = item.Id,
+                    ProductName = item.Name,
+                    ProductColor = item.Color,
+                    ProductNumber = item.Number
+                })
+                .ToListAsync();
         }
     }
 }

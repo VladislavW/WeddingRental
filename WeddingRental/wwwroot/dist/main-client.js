@@ -83,7 +83,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8e88d89710dbc1e2c0f3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ce78cd4ecd5bf14d0455"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -949,6 +949,9 @@ var AuthenticationService = (function () {
         return this.http
             .get(this.actionUrl + '/isauthenticated')
             .do(function (value) { return _this.isLoggedIn = true; });
+    };
+    AuthenticationService.prototype.getTerritories = function () {
+        return this.http.get(this.actionUrl + '/getTerritories');
     };
     AuthenticationService.prototype.getPermission = function () {
         return this.http.get(this.actionUrl + '/claims')
@@ -6004,7 +6007,7 @@ var routes = [
     },
     {
         path: 'auth',
-        loadChildren: function () { return new Promise(function (resolve) { __webpack_require__.e/* require.ensure */(4).then((function (require) { resolve(__webpack_require__(399)['AuthModule']); }).bind(null, __webpack_require__)).catch(__webpack_require__.oe); }); }
+        loadChildren: function () { return new Promise(function (resolve) { __webpack_require__.e/* require.ensure */(3).then((function (require) { resolve(__webpack_require__(399)['AuthModule']); }).bind(null, __webpack_require__)).catch(__webpack_require__.oe); }); }
     },
     {
         path: 'fetch-data',
@@ -6012,7 +6015,7 @@ var routes = [
     },
     {
         path: 'signup',
-        loadChildren: function () { return new Promise(function (resolve) { __webpack_require__.e/* require.ensure */(3).then((function (require) { resolve(__webpack_require__(404)['SignUpModule']); }).bind(null, __webpack_require__)).catch(__webpack_require__.oe); }); }
+        loadChildren: function () { return new Promise(function (resolve) { __webpack_require__.e/* require.ensure */(4).then((function (require) { resolve(__webpack_require__(404)['SignUpModule']); }).bind(null, __webpack_require__)).catch(__webpack_require__.oe); }); }
     },
     {
         path: '**',

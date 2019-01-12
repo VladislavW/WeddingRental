@@ -24,5 +24,17 @@ namespace Data.Repositories.Impl
                 .Select(item => item.Id)
                 .CountAsync();
         }
+
+        public async Task<string> GetCountryNameByAsync(int userId)
+        {
+            return await _context.Set<User>()
+                .Where(item => item.Id == userId)
+                .Join(
+                    _uow.TerritoryRepository.Source,	 
+                    e => e.TerritoryId, 		  
+                    o => o.Id, 		  
+                    (e, o) => o.CountryName)
+                .FirstOrDefaultAsync();
+        }
     }
 }

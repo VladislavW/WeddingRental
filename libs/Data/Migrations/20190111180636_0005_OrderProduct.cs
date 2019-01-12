@@ -55,7 +55,8 @@ namespace Data.Migrations
                 table: "OrderProduct",
                 column: "ProductId");
 
-            migrationBuilder.Sql(@"CREATE PROCEDURE [dbo].[SelectTopProduct]
+            migrationBuilder.Sql(@"
+CREATE PROCEDURE [dbo].[SelectTopProduct]
 AS
 BEGIN
 	SELECT top 10 
@@ -75,6 +76,14 @@ BEGIN
 	  where prod.Type = 1 -- dress
 	  Order By UsedProducts.Count DESC
 END
+");       
+            migrationBuilder.Sql(@"		
+		 INSERT INTO dbo.Territory (CountryName)
+VALUES ('USA');
+		 INSERT INTO dbo.Territory (CountryName)
+VALUES ('Japan');
+		 INSERT INTO dbo.Territory (CountryName)
+VALUES ('Ukraine');
 ");
         }
 

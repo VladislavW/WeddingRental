@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router} from '@angular/router';
 
 import { AuthenticationService } from '../core/services/authentication.service';
 
-import { AuthManagerService } from '../core/services/auth.manager.service';
-import { LocalStorageService } from '../core/services/local-storage.service';
 import {SignUpModel} from "../core/models/signUpModel";
 
 
@@ -16,13 +14,19 @@ export class SignUpComponent{
 
     email: string;
     password: string;
-    confirmPassword: string;
+    confirmpassword: string;
     
     errorMessage: string;
     hideErrorMessage: boolean;
 
+    territories: {
+        id: number,
+        name: string
+    }[];
 
-    customer = new SignUpModel();
+    territoryid: number;
+    
+    customer : SignUpModel;
     
     constructor(
         private authenticationService: AuthenticationService,
@@ -31,13 +35,18 @@ export class SignUpComponent{
 
         this.hideErrorMessage = false;
         this.errorMessage = '';
+
+        this.authenticationService.getTerritories().subscribe((t: any)=>{
+            this.territories = t.json();
+        });
     }
 
     signUp(): void {
         this.customer = {
             email: this.email,
             password: this.password,
-            confirmPassword: this.confirmPassword
+            confirmPassword: this.confirmpassword,
+            territoryId: this.territoryid
         };
 
         this.authenticationService

@@ -1,7 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Entities.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.Descriptors;
 using Services.Services;
@@ -14,12 +16,19 @@ namespace WeddingRental.Controllers
     public sealed class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private readonly UserManager<User> _userManager;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
         
-        public ProductController(IProductService productService, IMapper mapper)
+        public ProductController(
+            IProductService productService,
+            IMapper mapper, 
+            UserManager<User> userManager, IUserService userService)
         {
             _productService = productService;
             _mapper = mapper;
+            _userManager = userManager;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -27,7 +36,9 @@ namespace WeddingRental.Controllers
         [Route("[action]")]
         public async Task<JsonResult> Get()
         {
-            var views = await _productService.GetProductCatalogViewsAsync();
+            var user = await _userManager.GetUserAsync(User);
+            var countryName = user == null ? string.Empty : await _userService.GetCountryNameByAsync(user.Id);
+            var views = await _productService.GetProductCatalogViewsByUserCountryAsync(countryName);
             return Json(views);
         }
         
